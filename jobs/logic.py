@@ -1,12 +1,34 @@
+# import libraries
 import os
 import findspark
 findspark.init()
 
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.master("local").appName("CondeNast").getOrCreate()
+
+spark = SparkSession\
+    .builder\
+    .appName("FormulaOneAnalysis")\
+    .master("local[8]")\
+    .getOrCreate()
+
+from depenencies.spark import start_spark
+
+def main():
+    
+    spark, log, config = start_spark(
+        app_name = "formula_one_analysis"
+    )
+    
+    log.warn('etl is starting')
+    
+    
+
 
 from pyspark.sql.functions import when, upper, to_date, datediff, floor, rank, desc
 from pyspark.sql.window import Window
+
+def startSparkSession():
+    spark = 
 
 def getFileNames(folderPath):
     return os.listdir(folderPath)
